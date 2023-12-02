@@ -1,5 +1,3 @@
-use regex::Regex;
-
 fn part1(input: &str) -> usize {
     let mut values = vec![];
     input.lines().for_each(|line| {
@@ -15,35 +13,10 @@ fn part1(input: &str) -> usize {
                 }
             }
         });
-        println!("numeric {}", numeric);
         let value: usize = numeric.parse::<usize>().unwrap();
         values.push(value);
     });
-    println!("{:?}", values);
     values.iter().sum()
-}
-
-fn replace_digits(line: String) -> String {
-    println!("line: {}", line);
-    let re = Regex::new(r"(?:one|two|three|four|five|six|seven|eight|nine)").unwrap();
-    let mut new_line = line.clone();
-    re.captures_iter(line.as_str()).for_each(|cap| {
-        println!("cap: {:?}", &cap[0]);
-        match &cap[0] {
-            "one" => new_line = new_line.replace("one", "1"),
-            "two" => new_line = new_line.replace("two", "2"),
-            "three" => new_line = new_line.replace("three", "3"),
-            "four" => new_line = new_line.replace("four", "4"),
-            "five" => new_line = new_line.replace("five", "5"),
-            "six" => new_line = new_line.replace("six", "6"),
-            "seven" => new_line = new_line.replace("seven", "7"),
-            "eight" => new_line = new_line.replace("eight", "8"),
-            "nine" => new_line = new_line.replace("nine", "9"),
-            _ => {}
-        }
-        println!("new line: {}", new_line);
-    });
-    new_line
 }
 
 fn part2(input: &str) -> usize {
@@ -88,12 +61,10 @@ fn part2(input: &str) -> usize {
                 }
             }
         });
-        println!("numeric {}", numeric);
         let value: usize = numeric.parse::<usize>().unwrap();
         values.push(value);
     });
 
-    println!("{:?}", values);
     values.iter().sum()
 }
 
