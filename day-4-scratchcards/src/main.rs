@@ -1,4 +1,4 @@
-use {{ crate_name }}::{part1, part2};
+use day_4_scratchcards::{part1, part2};
 
 fn main() {
     part1::main();
