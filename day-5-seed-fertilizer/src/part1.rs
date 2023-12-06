@@ -103,8 +103,6 @@ impl Almanac {
                     break;
                 }
             }
-            println!("{:?} => {} -> {}", typ, nr, result);
-            println!();
         });
         result
     }
@@ -121,54 +119,40 @@ struct Map {
 impl Map {
     pub fn from_str(input: &str, map_type: MapType) -> Self {
         let mut items = input.split(' ');
-        let dest: i64 = dbg!(items.next().unwrap().parse().unwrap());
-        let src: i64 = dbg!(items.next().unwrap().parse().unwrap());
-        let len: i64 = dbg!(items.next().unwrap().parse().unwrap());
-        dbg!(Self {
+        let dest: i64 = items.next().unwrap().parse().unwrap();
+        let src: i64 = items.next().unwrap().parse().unwrap();
+        let len: i64 = items.next().unwrap().parse().unwrap();
+        Self {
             from: src,
             to: src + len - 1,
             diff: dest - src,
             typ: map_type,
-        })
+        }
     }
 
     pub fn in_range(&self, seed_nr: i64) -> bool {
         self.from <= seed_nr && seed_nr <= self.to
     }
 
-    pub fn get_mapped(&self, seed_nr: i64) -> i64 {
-        if self.in_range(seed_nr) {
-            seed_nr + self.diff
-        } else {
-            seed_nr
-        }
-    }
-
     pub fn maps_to(&self, seed_nr: i64) -> i64 {
         // seed_nr doesn't overlap
         // source <= seed_nr <= destination
-        println!(
-            "seed: {} lower {}, higher {}, diff {}",
-            seed_nr, self.from, self.to, self.diff
-        );
         if self.from <= seed_nr && seed_nr <= self.to {
-            let new_nr = seed_nr + self.diff;
-            println!("should map {} -> {}", seed_nr, new_nr,);
-            new_nr
+            seed_nr + self.diff
         } else {
             seed_nr
         }
     }
 }
 
-fn part1(input: &str) -> i64 {
+pub fn process(input: &str) -> i64 {
     let split_input: Vec<&str> = input.split("\n\n").collect();
     let seeds_line = &split_input[0].split(':').nth(1).unwrap().trim().split(' ');
     let almanac = Almanac::from_str(&split_input[1..]);
-    let mut seeds = dbg!(seeds_line
+    let seeds = seeds_line
         .clone()
         .map(|seed| seed.parse().unwrap())
-        .collect::<Vec<i64>>());
+        .collect::<Vec<i64>>();
 
     let mut results = Vec::new();
     for seed in seeds {
@@ -178,8 +162,8 @@ fn part1(input: &str) -> i64 {
 }
 
 pub fn main() {
-    let input1 = include_str!("../input1.txt");
-    let result = part1(input1);
+    let input1 = include_str!("../input.txt");
+    let result = process(input1);
     println!("part1: {}", result);
 }
 
@@ -223,7 +207,7 @@ humidity-to-location map:
 60 56 37
 56 93 4";
 
-        let result = part1(test_input);
+        let result = process(test_input);
         assert_eq!(35, result);
     }
 }

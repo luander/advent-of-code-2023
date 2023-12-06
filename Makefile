@@ -9,7 +9,9 @@ install-dependencies:
 		cargo-tarpaulin \
 		cargo-watch \
 		cargo-generate \
-		cargo-udeps
+		cargo-udeps \
+		flamegraph \
+		cargo-criterion
 
 test:
 	cargo test

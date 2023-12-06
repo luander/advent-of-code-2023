@@ -1,11 +1,11 @@
-fn part1(input: &str) -> u32 {
-    0
+pub fn process(input: &str) -> u32 {
+    todo!()
 }
 
 pub fn main() {
-    let input1 = include_str!("../input1.txt");
-    let result = part1(input1);
-    println!("part1: {}", result);
+    let input = include_str!("../input.txt");
+    let result = process(input);
+    println!("part2: {}", result);
 }
 
 #[cfg(test)]
@@ -14,19 +14,9 @@ mod test {
 
     #[test]
     fn part1_works() {
-        let test_input = "467..114..
-...*......
-..35..633.
-......#...
-617*......
-.....+.58.
-..592.....
-......755.
-...$.*....
-.664.598..
-.*..423.*.";
+        let test_input = "";
 
-        let result = part1(test_input);
-        assert_eq!(0, result);
+        let result = process(test_input);
+        assert_eq!(todo!(), result);
     }
 }

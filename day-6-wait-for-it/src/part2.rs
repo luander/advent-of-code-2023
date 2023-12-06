@@ -1,4 +1,4 @@
-fn part2(input: &str) -> u64 {
+pub fn process(input: &str) -> u64 {
     let time_line = &input.lines().next().unwrap()[9..];
     let time = String::from(time_line)
         .replace(' ', "")
@@ -32,8 +32,8 @@ fn part2(input: &str) -> u64 {
 }
 
 pub fn main() {
-    let input1 = include_str!("../input1.txt");
-    let result = part2(input1);
+    let input = include_str!("../input.txt");
+    let result = process(input);
     println!("part2: {}", result);
 }
 
@@ -45,7 +45,7 @@ mod test {
     fn part2_works() {
         let test_input = "Time:      7  15   30
 Distance:  9  40  200";
-        let result = part2(test_input);
+        let result = process(test_input);
         assert_eq!(71503, result);
     }
 }

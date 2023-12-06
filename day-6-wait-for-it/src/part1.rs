@@ -1,4 +1,4 @@
-fn part1(input: &str) -> u32 {
+pub fn process(input: &str) -> u32 {
     let time_line = &input.lines().next().unwrap()[9..];
     let time = time_line
         .split_whitespace()
@@ -29,8 +29,8 @@ fn part1(input: &str) -> u32 {
 }
 
 pub fn main() {
-    let input1 = include_str!("../input1.txt");
-    let result = part1(input1);
+    let input = include_str!("../input.txt");
+    let result = process(input);
     println!("part1: {}", result);
 }
 
@@ -42,7 +42,7 @@ mod test {
     fn part1_works() {
         let test_input = "Time:      7  15   30
 Distance:  9  40  200";
-        let result = part1(test_input);
+        let result = process(test_input);
         assert_eq!(288, result);
     }
 }

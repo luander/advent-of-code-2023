@@ -144,7 +144,7 @@ impl Map {
     }
 }
 
-fn part2(input: &str) -> i64 {
+pub fn process(input: &str) -> i64 {
     let split_input: Vec<&str> = input.split("\n\n").collect();
     let mut seeds_line = split_input[0].split(':').nth(1).unwrap().trim().split(' ');
     let almanac = Almanac::from_str(&split_input[1..]);
@@ -169,8 +169,8 @@ fn part2(input: &str) -> i64 {
 }
 
 pub fn main() {
-    let input1 = include_str!("../input1.txt");
-    let result = part2(input1);
+    let input1 = include_str!("../input.txt");
+    let result = process(input1);
     println!("part1: {}", result);
 }
 
@@ -214,7 +214,7 @@ humidity-to-location map:
 60 56 37
 56 93 4";
 
-        let result = part2(test_input);
+        let result = process(test_input);
         assert_eq!(46, result);
     }
 }
