@@ -4,3 +4,17 @@ members = ["day-*"]
 
 [profile.bench]
 debug = true
+
+[workspace.dependencies]
+dhat = "0.3.2"
+anyhow = "1.0.75"
+rstest = "0.18.2"
+itertools = "0.12.0"
+
+[profile.flamegraph]
+inherits = "release"
+debug = true
+
+[profile.dhat]
+inherits = "release"
+debug = 1

@@ -1,12 +1,14 @@
 [package]
-name = "{{project-name}}"
+name = "day-8-haunted-wasteland"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
 dhat.workspace = true
 anyhow.workspace = true
-rstest.workspace = true
+regex = "1.10.2"
+num = "0.4.1"
+rstest = "0.18.2"
 
 [dev-dependencies]
 criterion = "0.5.1"

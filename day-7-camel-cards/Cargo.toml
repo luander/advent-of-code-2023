@@ -3,7 +3,12 @@ name = "day-7-camel-cards"
 version = "0.1.0"
 edition = "2021"
 
+[features]
+dhat-heap = []
+
 [dependencies]
+dhat.workspace = true
+anyhow.workspace = true
 
 [[bin]]
 name = "part1"

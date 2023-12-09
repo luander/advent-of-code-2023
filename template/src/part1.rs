@@ -1,22 +1,18 @@
-pub fn process(input: &str) -> u32 {
-    todo!()
-}
-
-pub fn main() {
-    let input = include_str!("../input.txt");
-    let result = process(input);
-    println!("part1: {}", result);
+pub fn process(input: &str) -> anyhow::Result<u32> {
+    Ok(todo!())
 }
 
 #[cfg(test)]
 mod test {
     use super::*;
+    use rstest::rstest;
 
     #[test]
-    fn part1_works() {
+    fn part1_works() -> anyhow::Result<()> {
         let test_input = "";
 
-        let result = process(test_input);
+        let result = process(test_input)?;
         assert_eq!(todo!(), result);
+        Ok(())
     }
 }

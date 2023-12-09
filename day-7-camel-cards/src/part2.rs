@@ -138,7 +138,7 @@ impl<'a> Ord for Hand<'a> {
     }
 }
 
-pub fn process(input: &str) -> u32 {
+pub fn process(input: &str) -> anyhow::Result<u32> {
     let mut hands = input
         .lines()
         .map(|line| {
@@ -149,17 +149,11 @@ pub fn process(input: &str) -> u32 {
         })
         .collect::<Vec<(Hand, u32)>>();
     hands.sort_by(|(a, _), (b, _)| b.partial_cmp(a).expect("comparison to succeed"));
-    hands
+    Ok(hands
         .iter()
         .enumerate()
         .map(|(i, (_, bid))| (i as u32 + 1) * *bid)
-        .sum::<u32>()
-}
-
-pub fn main() {
-    let input = include_str!("../input.txt");
-    let result = process(input);
-    println!("part2: {}", result);
+        .sum::<u32>())
 }
 
 #[cfg(test)]
@@ -167,7 +161,7 @@ mod test {
     use super::*;
 
     #[test]
-    fn part2_works() {
+    fn part2_works() -> anyhow::Result<()> {
         let test_input = "32T3K 765
         T55J5 684
         KK677 28
@@ -193,8 +187,9 @@ mod test {
         // 2JJJJ 53
         // JJJJ2 41";
 
-        let result = process(test_input);
+        let result = process(test_input)?;
         assert_eq!(5905, result);
         // assert_eq!(6839, result);
+        Ok(())
     }
 }
