@@ -1,31 +1,32 @@
 use itertools::Itertools;
 
-fn predict_line(history: &str) -> i32 {
-    let mut values: Vec<Vec<i32>> = vec![];
-    values.push(
-        history
-            .split_whitespace()
-            .map(|a| a.parse().expect("all values are parseable"))
-            .collect::<Vec<i32>>(),
-    );
+fn predict_line(history: &str) -> Option<i32> {
+    let mut values: Vec<Vec<i32>> = vec![history
+        .split_whitespace()
+        .map(|a| a.parse().expect("all values are parseable"))
+        .collect()];
 
-    let mut lasts: Vec<i32> = vec![];
-    while values.last().unwrap().iter().any(|a| *a != 0) {
-        lasts.push(values.last().unwrap().last().unwrap().to_owned());
-        let tmp = values
-            .last()
-            .unwrap()
+    let mut next_values: Vec<i32> = vec![];
+    while values
+        .last()
+        .expect("last element in values available")
+        .iter()
+        .any(|a| *a != 0)
+    {
+        next_values.push(values.last()?.last()?.to_owned());
+        let difference = values
+            .last()?
             .iter()
             .tuple_windows()
             .map(|(a, b)| b - a)
-            .collect::<Vec<i32>>();
-        values.push(tmp);
+            .collect();
+        values.push(difference);
     }
-    lasts.into_iter().sum()
+    Some(next_values.into_iter().sum())
 }
 
 pub fn process(input: &str) -> anyhow::Result<i32> {
-    let result = input.lines().map(predict_line).sum();
+    let result = input.lines().flat_map(predict_line).sum();
     Ok(result)
 }
 
